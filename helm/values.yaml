@@ -2,7 +2,7 @@ deployment:
   name: tetris
   replicaCount: 1
 image:
-  repository: 891543987898.dkr.ecr.ap-south-1.amazonaws.com
+  repository: 491085382300.dkr.ecr.us-east-1.amazonaws.com
   tag: 1
   containerPort: 3000
 service:
