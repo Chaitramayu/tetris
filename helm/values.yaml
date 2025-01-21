@@ -17,4 +17,4 @@ resource:
     limit: 300Mi
 environment:
   env: DEV
-namespace: ingress
+namespace: dev
