@@ -16,5 +16,5 @@ resource:
     requests: 200Mi
     limit: 300Mi
 environment:
-  env: DEV
-namespace: dev
+  env: UAT
+namespace: uat
