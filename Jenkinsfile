@@ -10,7 +10,7 @@ pipeline {
         gitRepoURL = "${params.GIT_URL}"
         gitBranchName = "${params.BRANCH_NAME}"
         repoName = "${params.repository}"
-        dockerImage = "491085382300.dkr.ecr.us-east-1.amazonaws.com"/${repoName}"
+        dockerImage = "491085382300.dkr.ecr.us-east-1.amazonaws.com/${repoName}"
         gitCommit = "${GIT_COMMIT[0..6]}"
         dockerTag = "${params.BRANCH_NAME}-${gitCommit}"
     }
