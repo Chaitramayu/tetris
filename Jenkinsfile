@@ -30,7 +30,7 @@ pipeline {
                         withSonarQubeEnv('sonar-server') {
                             dir('src'){
                             sh '''
-                            $SCANNER_HOME/bin/sonar-scanner \
+                            $SCANNER_HOME/bin/sonar-server \
                             -Dsonar.projectName="$repoName" \
                             -Dsonar.projectKey="$repoName"
                             '''
