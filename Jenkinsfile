@@ -24,9 +24,39 @@ pipeline {
             }
         }
 
+        stage('SonarQube Analysis') {
+                steps {
+                    script {
+                        withSonarQubeEnv('sonar-server') {
+                            dir('src'){
+                            sh '''
+                            $SCANNER_HOME/bin/sonar-scanner \
+                            -Dsonar.projectName="$repoName" \
+                            -Dsonar.projectKey="$repoName"
+                            '''
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('SonarQube Quality Gate') {
+                steps {
+                    script {
+                        waitForQualityGate abortPipeline: false, credentialsId: 'sonar-server'
+                        }
+                    }
+                }
+            
         stage('Docker Build') {
             steps {
                     dockerImageBuild('$dockerImage', '$dockerTag')
+            }
+        }
+
+        stage('Trivy Scan'){
+            steps{
+                sh "trivy image -f json -o results-${BUILD_NUMBER}.json ${dockerImage}:${dockerTag}"
             }
         }
 
@@ -53,7 +83,5 @@ pipeline {
                 kubernetesEKSHelmDeploy('$dockerImage', '$dockerTag', '$repoName', 'awsCred', 'us-east-1', 'eks', 'uat')
             }
         }
-
     }
 }
-
