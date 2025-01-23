@@ -31,8 +31,8 @@ pipeline {
                             dir('src'){
                             sh '''
                             $SCANNER_HOME/bin/sonar-server \
-                            -Dsonar.projectName="$repoName" \
-                            -Dsonar.projectKey="$repoName"
+                            -Dsonar.projectName="shared-library" \
+                            -Dsonar.projectKey="shared-library"
                             '''
                         }
                     }
